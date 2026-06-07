@@ -1,18 +1,6 @@
 raw_logs = []
 processed_logs = []
 
-'''
-Chức năng 1: Nhập và làm sạch dữ liệu
-
-Yêu cầu người dùng nhập vào một đoạn log thô (có thể chứa ký tự rác như !, @, #, $).
-
-Hệ thống gọi một hàm chuyên biệt để làm sạch:
-
-- Sử dụng str.maketrans() và str.translate() để loại bỏ toàn bộ các ký tự đặc biệt (!@#$).
-- Sử dụng split(';') (giả sử người dùng nhập nhiều log cách nhau dấu chấm phẩy) để tách chuỗi thành một danh sách (List).
-- Lưu danh sách đã làm sạch vào biến toàn cục raw_logs.
-
-'''
 def handle_input_value(records):
     table = str.maketrans("", "", "@!#$")
     print("--- NẠP DỮ LIỆU LOG ---")
@@ -28,15 +16,6 @@ def handle_input_value(records):
     print(f"Đã làm sạch và lưu {len(list_data)} dòng log vào hệ thống.")
     print(records)
 
-'''
-Chức năng 2: Lọc Log cảnh báo (List Comprehension) 
-
-Hệ thống gọi một hàm để duyệt qua raw_logs.
-
-Yêu cầu bắt buộc: Dùng List Comprehension để tạo ra một danh sách mới chỉ chứa những dòng log có chứa từ khóa "ERROR" hoặc "CRITICAL" (không phân biệt hoa thường).
-Lưu kết quả vào biến processed_logs và in ra màn hình.
-
-'''
 def find_error(log_list, records):
     if not raw_logs:
         print("Chưa có dữ liệu log, vui lòng thực hiện chức năng 1")
@@ -51,20 +30,10 @@ def find_error(log_list, records):
     print(log_list)
 
 
-'''
-Chức năng 3: Mã hóa địa chỉ IP 
-
-Yêu cầu che giấu 2 dải số cuối của địa chỉ IP trong các log nguy hiểm để bảo mật thông tin trước khi xuất báo cáo. Hệ thống gọi một hàm để xử lý processed_logs:
-
-- Duyệt qua từng chuỗi log. Sử dụng split() để tách các từ, tìm chuỗi có định dạng IP (chứa dấu chấm).
-- Sử dụng replace() hoặc cắt chuỗi kết hợp join() để biến 192.168.1.1 thành 192.168.*.*.
-- Bắt buộc Return danh sách log đã mã hóa và in ra.
-'''
 def processed_logs(records):
     if not raw_logs:
         print("Chưa có dữ liệu log, vui lòng thực hiện chức năng 1")
         return
-    # 1. 192.168.1.1 Failed login
     for index, error in enumerate(records):
         records[index] = records[index].split(" ")
         for i,value in enumerate(records[index]):
